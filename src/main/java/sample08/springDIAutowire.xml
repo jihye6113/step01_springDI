@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="sample08.BookDTO" id="book1">
+		<property name="subject" value="spring"/>
+		<property name="writer" value="배지혜"/>
+		<property name="price" value="20000"/>
+		<property name="date" value="2020-05-11"/>
+	</bean>
+	
+	<bean class="sample08.BookDTO" id="book2" p:subject="jQuery"
+	p:price="35000" p:date="2020-05-01" p:writer="임지훈"/>
+		
+	<bean class="sample08.DbUtil" id="dbUtil"/>
+	
+	<bean class="sample08.EmailSender" id="email"/>
+	
+	<bean class="sample08.MessageSender" id="message"/>
+	
+	<bean class="sample08.BookDAOImpl" id="bookDao" autowire="constructor"/>
+	
+	<bean class="sample08.BookServiceImpl" id="bookService" 
+	autowire="byType">
+		<constructor-arg ref="bookDao"/>
+	</bean>
+	
+	<bean class="sample08.BookController" id="controller" 
+	autowire="constructor"/>
+</beans>
